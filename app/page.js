@@ -46,7 +46,10 @@ export default function Home() {
   };
 
   useEffect(() => {
-    fetchNotes()
+    const initFetch = async () => {
+      await fetchNotes();
+    };
+    initFetch();
   }, []);
 
   const onSubmit = async (e) => {
@@ -58,7 +61,7 @@ export default function Home() {
 
     try {
       setIsLoading(true);
-      
+
       if (editingId) {
         const res = await fetch(`/api/notes/${editingId}`, {
           method: 'PUT',
